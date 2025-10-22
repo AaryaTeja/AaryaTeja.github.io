@@ -4,26 +4,30 @@ class CustomNavbar extends HTMLElement {
     this.shadowRoot.innerHTML = `
       <style>
         nav {
-          background: rgba(255, 255, 255, 0.95);
+          background: rgba(10, 10, 10, 0.95);
+          backdrop-filter: blur(10px);
           padding: 1rem 2rem;
           display: flex;
           justify-content: space-between;
           align-items: center;
-          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 2px 20px rgba(220, 38, 38, 0.2);
           position: relative;
           z-index: 100;
           transition: all 0.3s ease;
+          border-bottom: 1px solid rgba(220, 38, 38, 0.1);
         }
         .logo {
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          background: linear-gradient(135deg, #ffffff 0%, #dc2626 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           font-weight: bold; 
-          font-size: 1.5rem;
+          font-size: 1.8rem;
           transition: all 0.3s ease;
+          font-family: 'Poppins', sans-serif;
         }
         .logo:hover {
           transform: scale(1.05);
+          text-shadow: 0 0 20px rgba(220, 38, 38, 0.5);
         }
         ul { 
           display: flex; 
@@ -33,12 +37,13 @@ class CustomNavbar extends HTMLElement {
           padding: 0; 
         }
         a { 
-          color: #4b5563;
+          color: #e5e5e5;
           text-decoration: none; 
           font-weight: 500;
           position: relative;
           padding: 0.5rem 0;
-          transition: color 0.3s ease;
+          transition: all 0.3s ease;
+          font-family: 'Poppins', sans-serif;
         }
         a::after {
           content: '';
@@ -47,40 +52,66 @@ class CustomNavbar extends HTMLElement {
           left: 0;
           width: 0;
           height: 2px;
-          background: linear-gradient(90deg, #3b82f6, #10b981);
+          background: linear-gradient(90deg, #dc2626, #ef4444);
           transition: width 0.3s ease;
         }
         a:hover::after {
           width: 100%;
         }
         a:hover {
-          color: #3b82f6;
+          color: #dc2626;
+          text-shadow: 0 0 10px rgba(220, 38, 38, 0.3);
         }
         .menu-button {
           display: none;
           background: none;
           border: none;
-          color: #4b5563;
+          color: #e5e5e5;
           font-size: 1.5rem;
           cursor: pointer;
+          transition: color 0.3s ease;
+        }
+        .menu-button:hover {
+          color: #dc2626;
+        }
+        .mobile-menu {
+          display: none;
+          flex-direction: column;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          width: 100%;
+          background: rgba(10, 10, 10, 0.98);
+          backdrop-filter: blur(20px);
+          padding: 2rem;
+          box-shadow: 0 4px 20px rgba(220, 38, 38, 0.3);
+          border-top: 1px solid rgba(220, 38, 38, 0.2);
+        }
+        .mobile-menu.active {
+          display: flex;
+        }
+        .mobile-menu li {
+          margin: 0.5rem 0;
+        }
+        .mobile-menu a {
+          display: block;
+          padding: 0.75rem 1rem;
+          border-radius: 8px;
+          transition: all 0.3s ease;
+        }
+        .mobile-menu a:hover {
+          background: rgba(220, 38, 38, 0.1);
+          transform: translateX(5px);
         }
         @media (max-width: 768px) {
+          nav {
+            padding: 1rem;
+          }
           ul {
             display: none;
           }
           .menu-button {
             display: block;
-          }
-          .mobile-menu {
-            display: flex;
-            flex-direction: column;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            background: white;
-            padding: 1rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
           }
         }
       </style>
@@ -105,7 +136,27 @@ class CustomNavbar extends HTMLElement {
     const navList = this.shadowRoot.querySelector('ul');
     
     menuButton.addEventListener('click', () => {
-      navList.classList.toggle('mobile-menu');
+      navList.classList.toggle('active');
+      
+      // Change icon based on menu state
+      const icon = menuButton.querySelector('i');
+      if (navList.classList.contains('active')) {
+        icon.className = 'fas fa-times';
+      } else {
+        icon.className = 'fas fa-bars';
+      }
+    });
+
+    // Close mobile menu when clicking on links
+    const navLinks = this.shadowRoot.querySelectorAll('a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        if (navList.classList.contains('active')) {
+          navList.classList.remove('active');
+          const icon = menuButton.querySelector('i');
+          icon.className = 'fas fa-bars';
+        }
+      });
     });
   }
 }
