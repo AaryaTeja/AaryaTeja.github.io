@@ -1,4 +1,4 @@
-
+// script.js - Simplified version without scroll animations
 
 // Animate skill bars when they come into view
 const observerOptions = {
@@ -24,158 +24,6 @@ const skillsSection = document.getElementById('skills');
 if (skillsSection) {
     observer.observe(skillsSection);
 }
-
-
-
-
-// Two-way Scroll Animation Observer
-const scrollObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            entry.target.classList.remove('hidden');
-            
-            // If it's a stagger container, animate children
-            if (entry.target.classList.contains('scroll-stagger')) {
-                const children = entry.target.children;
-                Array.from(children).forEach((child, index) => {
-                    setTimeout(() => {
-                        child.style.opacity = '1';
-                        child.style.transform = 'translateY(0)';
-                    }, index * 100);
-                });
-            }
-        } else {
-            // Only hide if we've scrolled past the element (not just above it)
-            const rect = entry.target.getBoundingClientRect();
-            if (rect.top > window.innerHeight) {
-                entry.target.classList.remove('visible');
-                entry.target.classList.add('hidden');
-                
-                // Reset stagger children
-                if (entry.target.classList.contains('scroll-stagger')) {
-                    const children = entry.target.children;
-                    Array.from(children).forEach((child, index) => {
-                        setTimeout(() => {
-                            child.style.opacity = '0';
-                            child.style.transform = 'translateY(30px)';
-                        }, index * 100);
-                    });
-                }
-            }
-        }
-    });
-}, {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-});
-
-// Smart Scroll Observer - Only animates when element leaves viewport completely
-const smartScrollObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        const element = entry.target;
-        
-        if (entry.isIntersecting) {
-            // Element is entering viewport
-            element.classList.add('visible');
-            element.classList.remove('hidden');
-            
-            // Handle stagger animations
-            if (element.classList.contains('scroll-stagger')) {
-                const children = element.children;
-                Array.from(children).forEach((child, index) => {
-                    setTimeout(() => {
-                        child.style.opacity = '1';
-                        child.style.transform = 'translateY(0)';
-                    }, index * 100);
-                });
-            }
-        } else {
-            // Element is leaving viewport - check direction
-            const rect = element.getBoundingClientRect();
-            const isScrollingDown = window.scrollY > (element._lastScrollY || 0);
-            element._lastScrollY = window.scrollY;
-            
-            // Only hide if element is above viewport (scrolling down) or below viewport (scrolling up)
-            if ((isScrollingDown && rect.bottom < 0) || (!isScrollingDown && rect.top > window.innerHeight)) {
-                element.classList.remove('visible');
-                element.classList.add('hidden');
-                
-                // Reset stagger children with reverse timing
-                if (element.classList.contains('scroll-stagger')) {
-                    const children = element.children;
-                    const childCount = children.length;
-                    Array.from(children).forEach((child, index) => {
-                        setTimeout(() => {
-                            child.style.opacity = '0';
-                            child.style.transform = 'translateY(30px)';
-                        }, (childCount - index - 1) * 100);
-                    });
-                }
-            }
-        }
-    });
-}, {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-});
-
-// Observe all elements with scroll animation classes
-document.addEventListener('DOMContentLoaded', () => {
-    const animatedElements = document.querySelectorAll(
-        '.scroll-fade-in, .scroll-fade-left, .scroll-fade-right, .scroll-scale-in, .scroll-stagger'
-    );
-    
-    animatedElements.forEach(element => {
-        smartScrollObserver.observe(element);
-    });
-});
-
-// Track scroll direction
-let lastScrollY = window.scrollY;
-window.addEventListener('scroll', () => {
-    const currentScrollY = window.scrollY;
-    document.body.setAttribute('data-scroll-direction', currentScrollY > lastScrollY ? 'down' : 'up');
-    lastScrollY = currentScrollY;
-});
-
-// EmailJS functionality
-(function() {
-    // Initialize EmailJS with your Public Key
-    emailjs.init("YOUR_PUBLIC_KEY"); // You'll get this from EmailJS
-    
-    const contactForm = document.getElementById('contact-form');
-    const formStatus = document.getElementById('form-status');
-    
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            // Show loading state
-            const submitButton = contactForm.querySelector('button[type="submit"]');
-            const originalText = submitButton.textContent;
-            submitButton.textContent = 'Sending...';
-            submitButton.disabled = true;
-            formStatus.textContent = '';
-            
-            // Send email using EmailJS
-            emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
-                .then(function() {
-                    formStatus.textContent = 'Message sent successfully!';
-                    formStatus.className = 'mt-4 text-center text-green-600 font-medium';
-                    contactForm.reset();
-                }, function(error) {
-                    formStatus.textContent = 'Failed to send message. Please try again.';
-                    formStatus.className = 'mt-4 text-center text-red-600 font-medium';
-                    console.error('EmailJS error:', error);
-                })
-                .finally(function() {
-                    submitButton.textContent = originalText;
-                    submitButton.disabled = false;
-                });
-        });
-    }
-})();
 
 // Formspree Form Handling
 const form = document.getElementById('contact-form');
@@ -223,3 +71,17 @@ if (form) {
         });
     });
 }
+
+// Initialize all elements as visible on page load
+document.addEventListener('DOMContentLoaded', () => {
+    // Remove all scroll animation classes to show content immediately
+    const animatedElements = document.querySelectorAll(
+        '.scroll-fade-in, .scroll-fade-left, .scroll-fade-right, .scroll-scale-in, .scroll-stagger'
+    );
+    
+    animatedElements.forEach(element => {
+        element.classList.remove('scroll-fade-in', 'scroll-fade-left', 'scroll-fade-right', 'scroll-scale-in', 'scroll-stagger');
+        element.style.opacity = '1';
+        element.style.transform = 'none';
+    });
+});
