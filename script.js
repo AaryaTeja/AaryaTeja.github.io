@@ -72,11 +72,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Scroll Animation Observer
+// Two-way Scroll Animation Observer
 const scrollObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('visible');
+            entry.target.classList.remove('hidden');
             
             // If it's a stagger container, animate children
             if (entry.target.classList.contains('scroll-stagger')) {
@@ -87,6 +88,74 @@ const scrollObserver = new IntersectionObserver((entries) => {
                         child.style.transform = 'translateY(0)';
                     }, index * 100);
                 });
+            }
+        } else {
+            // Only hide if we've scrolled past the element (not just above it)
+            const rect = entry.target.getBoundingClientRect();
+            if (rect.top > window.innerHeight) {
+                entry.target.classList.remove('visible');
+                entry.target.classList.add('hidden');
+                
+                // Reset stagger children
+                if (entry.target.classList.contains('scroll-stagger')) {
+                    const children = entry.target.children;
+                    Array.from(children).forEach((child, index) => {
+                        setTimeout(() => {
+                            child.style.opacity = '0';
+                            child.style.transform = 'translateY(30px)';
+                        }, index * 100);
+                    });
+                }
+            }
+        }
+    });
+}, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+});
+
+// Smart Scroll Observer - Only animates when element leaves viewport completely
+const smartScrollObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        const element = entry.target;
+        
+        if (entry.isIntersecting) {
+            // Element is entering viewport
+            element.classList.add('visible');
+            element.classList.remove('hidden');
+            
+            // Handle stagger animations
+            if (element.classList.contains('scroll-stagger')) {
+                const children = element.children;
+                Array.from(children).forEach((child, index) => {
+                    setTimeout(() => {
+                        child.style.opacity = '1';
+                        child.style.transform = 'translateY(0)';
+                    }, index * 100);
+                });
+            }
+        } else {
+            // Element is leaving viewport - check direction
+            const rect = element.getBoundingClientRect();
+            const isScrollingDown = window.scrollY > (element._lastScrollY || 0);
+            element._lastScrollY = window.scrollY;
+            
+            // Only hide if element is above viewport (scrolling down) or below viewport (scrolling up)
+            if ((isScrollingDown && rect.bottom < 0) || (!isScrollingDown && rect.top > window.innerHeight)) {
+                element.classList.remove('visible');
+                element.classList.add('hidden');
+                
+                // Reset stagger children with reverse timing
+                if (element.classList.contains('scroll-stagger')) {
+                    const children = element.children;
+                    const childCount = children.length;
+                    Array.from(children).forEach((child, index) => {
+                        setTimeout(() => {
+                            child.style.opacity = '0';
+                            child.style.transform = 'translateY(30px)';
+                        }, (childCount - index - 1) * 100);
+                    });
+                }
             }
         }
     });
@@ -102,8 +171,16 @@ document.addEventListener('DOMContentLoaded', () => {
     );
     
     animatedElements.forEach(element => {
-        scrollObserver.observe(element);
+        smartScrollObserver.observe(element);
     });
+});
+
+// Track scroll direction
+let lastScrollY = window.scrollY;
+window.addEventListener('scroll', () => {
+    const currentScrollY = window.scrollY;
+    document.body.setAttribute('data-scroll-direction', currentScrollY > lastScrollY ? 'down' : 'up');
+    lastScrollY = currentScrollY;
 });
 
 // EmailJS functionality
@@ -143,3 +220,50 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 })();
+
+// Formspree Form Handling
+const form = document.getElementById('contact-form');
+const formStatus = document.getElementById('form-status');
+
+if (form) {
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        // Show loading state
+        const submitButton = form.querySelector('button[type="submit"]');
+        const originalText = submitButton.textContent;
+        submitButton.textContent = 'Sending...';
+        submitButton.disabled = true;
+        formStatus.textContent = '';
+        
+        // Get form data
+        const formData = new FormData(form);
+        
+        // Send form data to Formspree
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                formStatus.textContent = 'Message sent successfully! I\'ll get back to you soon.';
+                formStatus.className = 'text-center mt-4 text-green-600 font-medium';
+                form.reset();
+            } else {
+                throw new Error('Form submission failed');
+            }
+        })
+        .catch(error => {
+            formStatus.textContent = 'Oops! There was a problem sending your message. Please email me directly at Aaryateja.addala@gmail.com';
+            formStatus.className = 'text-center mt-4 text-red-600 font-medium';
+            console.error('Form submission error:', error);
+        })
+        .finally(() => {
+            submitButton.textContent = originalText;
+            submitButton.disabled = false;
+        });
+    });
+}
