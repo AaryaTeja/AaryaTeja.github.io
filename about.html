@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Aaryateja Addala</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.bubbles.min.js"></script>
+</head>
+<body class="bg-beige-50 min-h-screen flex flex-col">
+    <div id="bubbles"></div>
+    <script src="components/navbar.js"></script>
+    <script src="components/footer.js"></script>
+    
+    <custom-navbar></custom-navbar>
+
+    <main class="container mx-auto px-4 py-12 flex-grow">
+        <!-- About Section -->
+        <section class="max-w-4xl mx-auto mb-20">
+            <h2 class="text-4xl font-bold text-beige-800 mb-8 text-center animate-fade-in">About Me</h2>
+            
+            <div class="bg-beige-100 bg-opacity-80 rounded-2xl p-8 shadow-xl backdrop-blur-sm animate-fade-in">
+                <div class="flex flex-col md:flex-row gap-8 items-center mb-8">
+                    <div class="w-full md:w-1/3">
+                        <div class="rounded-full overflow-hidden border-4 border-beige-300 shadow-lg animate-float">
+                            <img src="http://static.photos/technology/320x240/42" alt="Aaryateja Addala" class="w-full h-auto">
+                        </div>
+                    </div>
+                    <div class="w-full md:w-2/3">
+                        <p class="text-lg text-beige-800 mb-6 leading-relaxed">
+                            Hello! I'm Aaryateja, a passionate computer science engineer with a knack for creating innovative solutions. 
+                            I thrive on turning complex problems into elegant, user-friendly applications.
+                        </p>
+                        <p class="text-lg text-beige-800 leading-relaxed">
+                            When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, 
+                            or mentoring aspiring developers in my community.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="max-w-4xl mx-auto mb-20">
+            <h2 class="text-4xl font-bold text-beige-800 mb-8 text-center animate-fade-in">My Skills</h2>
+            
+            <div class="bg-beige-100 bg-opacity-80 rounded-2xl p-8 shadow-xl backdrop-blur-sm animate-fade-in">
+                <div class="text-center">
+                    <div class="flex flex-wrap justify-center gap-3 mb-8">
+                        <span class="skill-bubble">Python</span>
+                        <span class="skill-bubble">Java</span>
+                        <span class="skill-bubble">C++</span>
+                        <span class="skill-bubble">JavaScript</span>
+                        <span class="skill-bubble">HTML</span>
+                        <span class="skill-bubble">CSS</span>
+                        <span class="skill-bubble">React</span>
+                        <span class="skill-bubble">Node.js</span>
+                        <span class="skill-bubble">Git</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section class="max-w-4xl mx-auto mb-20" id="projects">
+            <h2 class="text-4xl font-bold text-beige-800 mb-8 text-center animate-fade-in">My Projects</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Project 1 -->
+                <div class="project-card bg-beige-100 bg-opacity-80 rounded-2xl p-6 shadow-xl backdrop-blur-sm animate-fade-in">
+                    <img src="http://static.photos/technology/640x360/1" alt="Smart Portfolio Website" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <h3 class="text-2xl font-semibold text-beige-800 mb-2">Smart Portfolio Website</h3>
+                    <p class="text-beige-700 mb-4">Built with React & TailwindCSS, featuring dynamic content and animations.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs px-2 py-1 bg-beige-200 rounded-full">React</span>
+                        <span class="text-xs px-2 py-1 bg-beige-200 rounded-full">Tailwind</span>
+                        <span class="text-xs px-2 py-1 bg-beige-200 rounded-full">JavaScript</span>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card bg-beige-100 bg-opacity-80 rounded-2xl p-6 shadow-xl backdrop-blur-sm animate-fade-in">
+                    <img src="http://static.photos/technology/640x360/2" alt="AI Chat App" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <h3 class="text-2xl font-semibold text-beige-800 mb-2">AI Chat App</h3>
+                    <p class="text-beige-700 mb-4">Powered by OpenAI API & Firebase, with real-time messaging capabilities.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs px-2 py-1 bg-beige-200 rounded-full">OpenAI</span>
+                        <span class="text-xs px-2 py-1 bg-beige-200 rounded-full">Firebase</span>
+                        <span class="text-xs px-2 py-1 bg-beige-200 rounded-full">React</span>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="project-card bg-beige-100 bg-opacity-80 rounded-2xl p-6 shadow-xl backdrop-blur-sm animate-fade-in">
+                    <img src="http://static.photos/technology/640x360/3" alt="Weather Dashboard" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <h3 class="text-2xl font-semibold text-beige-800 mb-2">Weather Dashboard</h3>
+                    <p class="text-beige-700 mb-4">Uses real-time API data to display weather forecasts with interactive maps.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs px-2 py-1 bg-beige-200 rounded-full">API</span>
+                        <span class="text-xs px-2 py-1 bg-beige-200 rounded-full">JavaScript</span>
+                        <span class="text-xs px-2 py-1 bg-beige-200 rounded-full">CSS</span>
+                    </div>
+                </div>
+                
+                <!-- Project 4 -->
+                <div class="project-card bg-beige-100 bg-opacity-80 rounded-2xl p-6 shadow-xl backdrop-blur-sm animate-fade-in">
+                    <img src="http://static.photos/technology/640x360/4" alt="E-commerce Platform" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <h3 class="text-2xl font-semibold text-beige-800 mb-2">E-commerce Platform</h3>
+                    <p class="text-beige-700 mb-4">Full-stack e-commerce solution with payment integration and admin dashboard.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs px-2 py-1 bg-beige-200 rounded-full">Node.js</span>
+                        <span class="text-xs px-2 py-1 bg-beige-200 rounded-full">MongoDB</span>
+                        <span class="text-xs px-2 py-1 bg-beige-200 rounded-full">React</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="max-w-4xl mx-auto" id="contact">
+            <h2 class="text-4xl font-bold text-beige-800 mb-8 text-center animate-fade-in">Get In Touch</h2>
+            
+            <div class="bg-beige-100 bg-opacity-80 rounded-2xl p-8 shadow-xl backdrop-blur-sm animate-fade-in">
+                <div class="text-center">
+                    <p class="text-lg text-beige-800 mb-8">
+                        Have a project in mind or want to collaborate? Feel free to reach out!
+                    </p>
+                    
+                    <div class="flex justify-center space-x-6 mb-10">
+                        <a href="mailto:Aaryateja.addala@gmail.com" class="contact-bubble">
+                            <i data-feather="mail" class="w-6 h-6"></i>
+                        </a>
+                        <a href="#" class="contact-bubble">
+                            <i data-feather="github" class="w-6 h-6"></i>
+                        </a>
+                        <a href="#" class="contact-bubble">
+                            <i data-feather="instagram" class="w-6 h-6"></i>
+                        </a>
+                        <a href="#" class="contact-bubble">
+                            <i data-feather="linkedin" class="w-6 h-6"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <custom-footer></custom-footer>
+
+    <script src="script.js"></script>
+    <script>
+        feather.replace();
+        
+        // Bubbles background effect
+        VANTA.BUBBLES({
+            el: "#bubbles",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0xe0d5c0,
+            backgroundColor: 0xf5f5dc,
+            size: 2.00,
+            quantity: 3.00
+        });
+
+        // Create hover bubbles for project cards
+        const projectCards = document.querySelectorAll('.project-card');
+        projectCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const bubble = document.createElement('div');
+                bubble.className = 'bubble-effect';
+                bubble.style.left = `${x}px`;
+                bubble.style.top = `${y}px`;
+                bubble.style.width = '30px';
+                bubble.style.height = '30px';
+                bubble.style.opacity = '0.3';
+                
+                card.appendChild(bubble);
+                
+                setTimeout(() => {
+                    bubble.remove();
+                }, 1000);
+            });
+        });
+    </script>
+</body>
+</html>
