@@ -71,3 +71,75 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+// Scroll Animation Observer
+const scrollObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            
+            // If it's a stagger container, animate children
+            if (entry.target.classList.contains('scroll-stagger')) {
+                const children = entry.target.children;
+                Array.from(children).forEach((child, index) => {
+                    setTimeout(() => {
+                        child.style.opacity = '1';
+                        child.style.transform = 'translateY(0)';
+                    }, index * 100);
+                });
+            }
+        }
+    });
+}, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+});
+
+// Observe all elements with scroll animation classes
+document.addEventListener('DOMContentLoaded', () => {
+    const animatedElements = document.querySelectorAll(
+        '.scroll-fade-in, .scroll-fade-left, .scroll-fade-right, .scroll-scale-in, .scroll-stagger'
+    );
+    
+    animatedElements.forEach(element => {
+        scrollObserver.observe(element);
+    });
+});
+
+// EmailJS functionality
+(function() {
+    // Initialize EmailJS with your Public Key
+    emailjs.init("YOUR_PUBLIC_KEY"); // You'll get this from EmailJS
+    
+    const contactForm = document.getElementById('contact-form');
+    const formStatus = document.getElementById('form-status');
+    
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Show loading state
+            const submitButton = contactForm.querySelector('button[type="submit"]');
+            const originalText = submitButton.textContent;
+            submitButton.textContent = 'Sending...';
+            submitButton.disabled = true;
+            formStatus.textContent = '';
+            
+            // Send email using EmailJS
+            emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
+                .then(function() {
+                    formStatus.textContent = 'Message sent successfully!';
+                    formStatus.className = 'mt-4 text-center text-green-600 font-medium';
+                    contactForm.reset();
+                }, function(error) {
+                    formStatus.textContent = 'Failed to send message. Please try again.';
+                    formStatus.className = 'mt-4 text-center text-red-600 font-medium';
+                    console.error('EmailJS error:', error);
+                })
+                .finally(function() {
+                    submitButton.textContent = originalText;
+                    submitButton.disabled = false;
+                });
+        });
+    }
+})();
