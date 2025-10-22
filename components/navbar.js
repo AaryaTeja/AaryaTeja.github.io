@@ -122,7 +122,7 @@ class CustomNavbar extends HTMLElement {
       </style>
       <nav>
         <a href="#home" class="logo">Aaryateja</a>
-        // In navbar.js, replace the <ul> section with this:
+      
 <ul>
   <li><a href="#home" class="nav-link">Home</a></li>
   <li><a href="#about" class="nav-link">About</a></li>
