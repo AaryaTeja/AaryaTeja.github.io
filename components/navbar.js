@@ -122,8 +122,7 @@ class CustomNavbar extends HTMLElement {
       </style>
       <nav>
         <a href="#home" class="logo">Aaryateja</a>
-      
-<ul>
+  <ul>
   <li><a href="#home" class="nav-link">Home</a></li>
   <li><a href="#about" class="nav-link">About</a></li>
   <li><a href="#skills" class="nav-link">Skills</a></li>
