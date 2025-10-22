@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aaryateja Addala | CS Engineer</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.bubbles.min.js"></script>
+    <style>
+        .bubble-effect {
+            position: absolute;
+            background-color: rgba(245, 245, 220, 0.6);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body class="bg-beige-50 min-h-screen flex flex-col">
+    <div id="bubbles"></div>
+    <script src="components/navbar.js"></script>
+    <script src="components/footer.js"></script>
+    
+    <custom-navbar></custom-navbar>
+
+    <main class="container mx-auto px-4 py-12 flex-grow">
+        <section class="max-w-4xl mx-auto text-center">
+            <div class="animate-float">
+                <h1 class="text-5xl md:text-6xl font-bold text-beige-800 mb-6">Aaryateja Addala</h1>
+                <h2 class="text-2xl md:text-3xl font-semibold text-beige-700 mb-8">Computer Science Engineer</h2>
+            </div>
+            
+            <div class="bg-beige-100 bg-opacity-80 rounded-2xl p-8 shadow-xl backdrop-blur-sm animate-fade-in">
+                <p class="text-lg text-beige-800 mb-8 leading-relaxed">
+                    I'm a computer science engineer who loves coding, creating cool projects, and exploring new technologies. 
+                    I focus on building practical and creative solutions that make a difference.
+                </p>
+                
+                <div class="flex justify-center space-x-6 mb-10">
+                    <a href="mailto:Aaryateja.addala@gmail.com" class="contact-bubble">
+                        <i data-feather="mail" class="w-6 h-6"></i>
+                    </a>
+                    <a href="#" class="contact-bubble">
+                        <i data-feather="github" class="w-6 h-6"></i>
+                    </a>
+                    <a href="#" class="contact-bubble">
+                        <i data-feather="instagram" class="w-6 h-6"></i>
+                    </a>
+                </div>
+                
+                <a href="about.html" class="inline-block px-8 py-3 bg-beige-200 hover:bg-beige-300 text-beige-800 rounded-full font-medium transition-all transform hover:scale-105">
+                    Explore My Work
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <custom-footer></custom-footer>
+
+    <script src="script.js"></script>
+    <script>
+        feather.replace();
+        
+        // Bubbles background effect
+        VANTA.BUBBLES({
+            el: "#bubbles",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0xe0d5c0,
+            backgroundColor: 0xf5f5dc,
+            size: 2.00,
+            quantity: 3.00
+        });
+
+        // Create floating bubbles
+        function createBubbles() {
+            const bubbleCount = 15;
+            const bubblesContainer = document.createElement('div');
+            bubblesContainer.className = 'bubbles-container';
+            bubblesContainer.style.position = 'fixed';
+            bubblesContainer.style.top = '0';
+            bubblesContainer.style.left = '0';
+            bubblesContainer.style.width = '100%';
+            bubblesContainer.style.height = '100%';
+            bubblesContainer.style.pointerEvents = 'none';
+            bubblesContainer.style.zIndex = '-1';
+            document.body.appendChild(bubblesContainer);
+
+            for (let i = 0; i < bubbleCount; i++) {
+                const bubble = document.createElement('div');
+                bubble.className = 'bubble-effect';
+                
+                const size = Math.random() * 100 + 50;
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                const delay = Math.random() * 5;
+                const duration = Math.random() * 10 + 10;
+                
+                bubble.style.width = `${size}px`;
+                bubble.style.height = `${size}px`;
+                bubble.style.left = `${posX}%`;
+                bubble.style.top = `${posY}%`;
+                bubble.style.opacity = Math.random() * 0.4 + 0.1;
+                bubble.style.animation = `float ${duration}s ease-in-out ${delay}s infinite`;
+                
+                bubblesContainer.appendChild(bubble);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', createBubbles);
+    </script>
+<script src="https://deepsite.hf.co/deepsite-badge.js"></script>
+</body>
+</html>
