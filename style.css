@@ -1,128 +1,139 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
 
 :root {
-    --color-beige-50: #f5f5dc;
-    --color-beige-100: #e8e6d9;
-    --color-beige-200: #d8d5c0;
-    --color-beige-300: #c8c4a8;
-    --color-beige-400: #b8b38f;
-    --color-beige-500: #a89d75;
-    --color-beige-600: #8e855e;
-    --color-beige-700: #746d4a;
-    --color-beige-800: #5a5538;
-    --color-beige-900: #403c27;
+    --primary: #3b82f6;
+    --primary-dark: #1d4ed8;
+    --secondary: #10b981;
+    --accent: #8b5cf6;
+    --dark: #1f2937;
+    --light: #f9fafb;
 }
 
 body {
     font-family: 'Poppins', sans-serif;
-    color: var(--color-beige-800);
+    background-color: var(--light);
+    color: var(--dark);
+    overflow-x: hidden;
 }
 
-.bg-beige-50 { background-color: var(--color-beige-50); }
-.bg-beige-100 { background-color: var(--color-beige-100); }
-.bg-beige-200 { background-color: var(--color-beige-200); }
-.bg-beige-300 { background-color: var(--color-beige-300); }
-.bg-beige-400 { background-color: var(--color-beige-400); }
-.bg-beige-500 { background-color: var(--color-beige-500); }
-.bg-beige-600 { background-color: var(--color-beige-600); }
-.bg-beige-700 { background-color: var(--color-beige-700); }
-.bg-beige-800 { background-color: var(--color-beige-800); }
-.bg-beige-900 { background-color: var(--color-beige-900); }
-
-.text-beige-50 { color: var(--color-beige-50); }
-.text-beige-100 { color: var(--color-beige-100); }
-.text-beige-200 { color: var(--color-beige-200); }
-.text-beige-300 { color: var(--color-beige-300); }
-.text-beige-400 { color: var(--color-beige-400); }
-.text-beige-500 { color: var(--color-beige-500); }
-.text-beige-600 { color: var(--color-beige-600); }
-.text-beige-700 { color: var(--color-beige-700); }
-.text-beige-800 { color: var(--color-beige-800); }
-.text-beige-900 { color: var(--color-beige-900); }
-
-.border-beige-500 { border-color: var(--color-beige-500); }
-
-@keyframes float {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-20px);
-    }
+.gradient-bg {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
-@keyframes fade-in {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.texas-bg {
+    background: linear-gradient(135deg, #bf0a30 0%, #002868 100%);
 }
 
-.animate-float {
-    animation: float 6s ease-in-out infinite;
+.text-gradient {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-.animate-fade-in {
-    animation: fade-in 1s ease-out forwards;
-}
-
-.contact-bubble {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 50px;
-    height: 50px;
-    background-color: rgba(245, 245, 220, 0.7);
-    border-radius: 50%;
+.card-hover {
     transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.contact-bubble:hover {
-    transform: translateY(-5px) scale(1.1);
-    background-color: rgba(245, 245, 220, 0.9);
+.card-hover:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
-@keyframes float {
-    0% {
-        transform: translateY(0) translateX(0);
-    }
-    50% {
-        transform: translateY(-100px) translateX(20px);
-    }
-    100% {
-        transform: translateY(0) translateX(0);
-    }
+.skill-bar {
+    height: 8px;
+    border-radius: 4px;
+    background-color: #e5e7eb;
+    overflow: hidden;
 }
 
-.bubble-effect {
-    animation: float 15s ease-in-out infinite;
+.skill-progress {
+    height: 100%;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    transition: width 1s ease-in-out;
 }
 
-.skill-bubble {
+.floating {
+    animation: floating 3s ease-in-out infinite;
+}
+
+@keyframes floating {
+    0% { transform: translate(0, 0px); }
+    50% { transform: translate(0, 15px); }
+    100% { transform: translate(0, -0px); }
+}
+
+.typewriter {
+    overflow: hidden;
+    border-right: .15em solid var(--primary);
+    white-space: nowrap;
+    margin: 0 auto;
+    animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+}
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: var(--primary); }
+}
+
+.nav-link {
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--primary);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.section-title {
+    position: relative;
     display: inline-block;
-    padding: 8px 16px;
-    margin: 4px;
-    background-color: rgba(245, 245, 220, 0.7);
-    border-radius: 20px;
-    transition: all 0.3s ease;
 }
 
-.skill-bubble:hover {
+.section-title::after {
+    content: '';
+    position: absolute;
+    width: 60%;
+    height: 4px;
+    bottom: -10px;
+    left: 20%;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border-radius: 2px;
+}
+
+.project-image {
+    transition: transform 0.5s ease;
+}
+
+.project-card:hover .project-image {
     transform: scale(1.05);
-    background-color: rgba(245, 245, 220, 0.9);
 }
 
-.project-card {
+.contact-icon {
     transition: all 0.3s ease;
-    transform-origin: center;
 }
 
-.project-card:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+.contact-icon:hover {
+    transform: translateY(-5px);
+}
+
+.school-color {
+    background: linear-gradient(135deg, #BF0A30 0%, #002868 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
