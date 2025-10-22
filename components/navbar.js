@@ -11,8 +11,11 @@ class CustomNavbar extends HTMLElement {
           justify-content: space-between;
           align-items: center;
           box-shadow: 0 2px 20px rgba(220, 38, 38, 0.2);
-          position: relative;
-          z-index: 100;
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          z-index: 1000;
           transition: all 0.3s ease;
           border-bottom: 1px solid rgba(220, 38, 38, 0.1);
         }
@@ -24,6 +27,7 @@ class CustomNavbar extends HTMLElement {
           font-size: 1.8rem;
           transition: all 0.3s ease;
           font-family: 'Poppins', sans-serif;
+          text-decoration: none;
         }
         .logo:hover {
           transform: scale(1.05);
@@ -44,6 +48,7 @@ class CustomNavbar extends HTMLElement {
           padding: 0.5rem 0;
           transition: all 0.3s ease;
           font-family: 'Poppins', sans-serif;
+          cursor: pointer;
         }
         a::after {
           content: '';
@@ -131,6 +136,9 @@ class CustomNavbar extends HTMLElement {
       </nav>
     `;
     
+    // Add smooth scrolling functionality
+    this.setupSmoothScrolling();
+    
     // Add mobile menu functionality
     const menuButton = this.shadowRoot.querySelector('.menu-button');
     const navList = this.shadowRoot.querySelector('ul');
@@ -155,6 +163,32 @@ class CustomNavbar extends HTMLElement {
           navList.classList.remove('active');
           const icon = menuButton.querySelector('i');
           icon.className = 'fas fa-bars';
+        }
+      });
+    });
+  }
+
+  setupSmoothScrolling() {
+    const navLinks = this.shadowRoot.querySelectorAll('a[href^="#"]');
+    
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        const targetId = link.getAttribute('href');
+        if (targetId === '#') return;
+        
+        // Find the target element in the main document
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          // Calculate position with offset for fixed navbar
+          const navbarHeight = this.shadowRoot.querySelector('nav').offsetHeight;
+          const targetPosition = targetElement.offsetTop - navbarHeight;
+          
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
         }
       });
     });
