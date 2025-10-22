@@ -122,14 +122,15 @@ class CustomNavbar extends HTMLElement {
       </style>
       <nav>
         <a href="#home" class="logo">Aaryateja</a>
-        <ul>
-          <li><a href="#home" class="nav-link">Home</a></li>
-          <li><a href="#about" class="nav-link">About</a></li>
-          <li><a href="#skills" class="nav-link">Skills</a></li>
-          <li><a href="#projects" class="nav-link">Projects</a></li>
-          <li><a href="#interests" class="nav-link">Interests</a></li>
-          <li><a href="#contact" class="nav-link">Contact</a></li>
-        </ul>
+        // In navbar.js, replace the <ul> section with this:
+<ul>
+  <li><a href="#home" class="nav-link">Home</a></li>
+  <li><a href="#about" class="nav-link">About</a></li>
+  <li><a href="#skills" class="nav-link">Skills</a></li>
+  <li><a href="#projects" class="nav-link">Projects</a></li>
+  <li><a href="#interests" class="nav-link">Interests</a></li>
+  <li><a href="#contact" class="nav-link">Contact</a></li>
+</ul>
         <button class="menu-button">
           <i class="fas fa-bars"></i>
         </button>
