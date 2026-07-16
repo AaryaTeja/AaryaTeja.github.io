@@ -2,9 +2,9 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
-// `base` is set to "/<repo>/" in CI (see .github/workflows/deploy.yml) so assets
-// resolve correctly under GitHub Pages project sites. Defaults to "/" for local dev.
+// Deployed as a GitHub Pages *user site* (aaryateja.github.io), so assets are
+// served from the domain root — base stays "/".
 export default defineConfig({
-  base: process.env.VITE_BASE || '/',
+  base: '/',
   plugins: [react()],
 })
