@@ -7,6 +7,10 @@ dist-ssr
 .vite
 *.tsbuildinfo
 
+# emitted by `tsc -b` from vite.config.ts — regenerated, never committed
+vite.config.js
+vite.config.d.ts
+
 # local tooling / archived previous Next.js project — not pushed to GitHub
 .claude/
 backup/
