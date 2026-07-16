@@ -1,0 +1,12 @@
+node_modules
+dist
+dist-ssr
+.DS_Store
+*.local
+*.log
+.vite
+*.tsbuildinfo
+
+# local tooling / archived previous Next.js project — not pushed to GitHub
+.claude/
+backup/
