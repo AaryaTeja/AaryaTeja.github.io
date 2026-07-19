@@ -1,5 +1,4 @@
 import type { ComponentType, SVGProps } from 'react'
-import Background3D from '../components/Background3D'
 import { ImageIcon, MovieIcon, LightbulbIcon } from '../components/icons'
 
 interface Capability {
@@ -32,30 +31,9 @@ const CARDS: Capability[] = [
 
 export default function Capabilities() {
   return (
-    <section
-      id="work"
-      className="relative min-h-screen overflow-hidden bg-black"
-    >
-      {/* Minimalist 3D wireframe backdrop */}
-      <div
-        className="absolute inset-0 z-0"
-        style={{
-          background:
-            'radial-gradient(circle at 72% 38%, rgba(255,255,255,0.05), rgba(0,0,0,0) 55%)',
-        }}
-      />
-      <Background3D
-        className="absolute inset-0 z-0"
-        shape="icosahedron"
-        radius={0.52}
-        speed={0.65}
-        opacity={0.4}
-        offsetX={0.22}
-        offsetY={-0.04}
-      />
-
+    <section id="work" className="relative bg-black">
       {/* Content */}
-      <div className="relative z-10 px-8 md:px-16 lg:px-20 pt-24 pb-10 flex flex-col min-h-screen">
+      <div className="px-8 md:px-16 lg:px-20 pt-24 pb-10 flex flex-col min-h-screen">
         {/* Header */}
         <div className="mb-auto">
           <div className="text-sm font-body text-white/80 mb-6">

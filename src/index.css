@@ -2,12 +2,79 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --lilac: #c2a4ff;
+}
+
 html,
 body {
   background: #000;
   color: #fff;
   font-family: 'Barlow', sans-serif;
   scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--lilac);
+  color: #000;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+::-webkit-scrollbar-thumb {
+  background: #2a2a2a;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3a3a3a;
+}
+
+/* ── Lilac CTA pill — the site's one deliberate accent moment ────── */
+.cta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--lilac);
+  color: #000;
+  border-radius: 999px;
+  padding: 0.8rem 1.9rem;
+  font-weight: 500;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+}
+.cta-pill:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 40px rgba(194, 164, 255, 0.35);
+}
+
+.cta-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #fff;
+  border-radius: 999px;
+  padding: 0.8rem 1.9rem;
+  font-weight: 500;
+  transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.cta-ghost:hover {
+  border-color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.04);
+  transform: translateY(-2px);
 }
 
 /* ─────────────────────────────────────────────────────────────
