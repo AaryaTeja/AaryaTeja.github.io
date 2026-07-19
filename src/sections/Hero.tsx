@@ -1,12 +1,11 @@
 import { motion } from 'framer-motion'
-import Background3D from '../components/Background3D'
+import { Link } from 'react-router-dom'
+import GlassBlob from '../components/LazyGlassBlob'
 import BlurText from '../components/BlurText'
 import { ArrowUpRight, Play, ClockIcon, GlobeIcon } from '../components/icons'
+import { SITE } from '../data/content'
 
-const NAV_LINKS = ['Work', 'About', 'Skills', 'Journal', 'Contact']
-
-const EMAIL = 'mailto:hello@aaryateja.dev'
-const GITHUB = 'https://github.com/AaryaTeja'
+const EMAIL = `mailto:${SITE.email}`
 
 // Shared blur-in reveal used by every on-load element.
 const reveal = {
@@ -17,72 +16,16 @@ const ease = 'easeOut'
 
 export default function Hero() {
   return (
-    <section className="relative h-screen overflow-hidden bg-black">
-      {/* Minimalist 3D wireframe backdrop */}
-      <div
-        className="absolute inset-0 z-0"
-        style={{
-          background:
-            'radial-gradient(circle at 50% 42%, rgba(255,255,255,0.06), rgba(0,0,0,0) 60%)',
-        }}
-      />
-      <Background3D
-        className="absolute inset-0 z-0"
-        shape="icosahedron"
-        radius={0.4}
-        speed={1}
-        opacity={0.5}
-      />
+    <section id="top" className="relative h-screen overflow-hidden bg-black">
+      {/* Real WebGL glass gem — the page's one signature 3D moment, floats off to the side so it never fights headline legibility */}
+      <div className="hidden sm:block absolute right-[0%] top-[10%] h-[380px] w-[380px] lg:h-[460px] lg:w-[460px] z-0">
+        <GlassBlob tint="#C2A4FF" size={2.4} />
+      </div>
 
       {/* Content */}
       <div className="relative z-10 flex flex-col h-full">
-        {/* Navbar */}
-        <nav className="fixed top-4 left-0 right-0 z-50 flex items-center justify-between px-8 lg:px-16">
-          {/* Left: logo */}
-          <a
-            href="#top"
-            className="liquid-glass h-12 w-12 rounded-full flex items-center justify-center"
-          >
-            <span className="font-heading italic text-2xl leading-none text-white">
-              a
-            </span>
-          </a>
-
-          {/* Center: nav pill */}
-          <div className="hidden md:flex items-center liquid-glass rounded-full px-1.5 py-1.5">
-            {NAV_LINKS.map((link) => (
-              <a
-                key={link}
-                href={
-                  link === 'Contact'
-                    ? EMAIL
-                    : link === 'Work'
-                      ? '#work'
-                      : '#'
-                }
-                className="px-3 py-2 text-sm font-medium text-white/90 font-body"
-              >
-                {link}
-              </a>
-            ))}
-            <a
-              href={EMAIL}
-              className="ml-1 flex items-center gap-1 bg-white text-black rounded-full px-4 py-2 text-sm font-medium font-body"
-            >
-              Let's Talk
-              <ArrowUpRight className="h-4 w-4" />
-            </a>
-          </div>
-
-          {/* Right: spacer to balance the logo */}
-          <div className="h-12 w-12" />
-        </nav>
-
         {/* Main content */}
-        <div
-          id="top"
-          className="flex-1 flex flex-col items-center justify-center pt-24 px-4 text-center"
-        >
+        <div className="flex-1 flex flex-col items-center justify-center pt-24 px-4 text-center">
           {/* Badge */}
           <motion.div
             {...reveal}
@@ -122,15 +65,13 @@ export default function Hero() {
             transition={{ duration: 0.8, ease, delay: 1.1 }}
             className="mt-6 flex items-center gap-6"
           >
-            <a
-              href={GITHUB}
-              target="_blank"
-              rel="noreferrer"
-              className="liquid-glass-strong rounded-full px-5 py-2.5 flex items-center gap-2 text-sm font-medium font-body text-white"
+            <Link
+              to="/projects"
+              className="liquid-glass-strong rounded-full px-5 py-2.5 flex items-center gap-2 text-sm font-medium font-body text-white transition-transform duration-200 hover:scale-[1.03]"
             >
               View My Work
               <ArrowUpRight className="h-4 w-4" />
-            </a>
+            </Link>
             <a
               href={EMAIL}
               className="flex items-center gap-2 text-sm font-medium font-body text-white"
