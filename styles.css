@@ -5,6 +5,55 @@ a { color: #100f0d; text-decoration: none; }
 a:hover { color: #ff4b2e; }
 ::selection { background: #ff4b2e; color: #f2f0ea; }
 @keyframes ap-wave { 0%,60%,100% { transform: rotate(0deg); } 20% { transform: rotate(18deg); } 40% { transform: rotate(-8deg); } }
+@keyframes ap-headline-rise {
+  from { opacity: 0; filter: blur(12px); transform: translate3d(0, 112%, 0) rotateX(18deg); }
+  58% { opacity: 1; filter: blur(3px); }
+  to { opacity: 1; filter: blur(0); transform: translate3d(0, 0, 0) rotateX(0); }
+}
+@keyframes ap-outline-sheen {
+  0%, 18% { background-position: 130% 50%; opacity: 0; }
+  32%, 58% { opacity: .62; }
+  100% { background-position: -35% 50%; opacity: 0; }
+}
+
+.ap-hero-line {
+  display: block;
+  overflow: hidden;
+  perspective: 900px;
+}
+.ap-hero-word {
+  display: block;
+  opacity: 1;
+  transform: none;
+}
+#ap-root.ap-js .ap-hero-word {
+  opacity: 0;
+  transform: translate3d(0, 112%, 0) rotateX(18deg);
+  transform-origin: 50% 100%;
+  will-change: transform, opacity, filter;
+}
+#ap-root.ap-ready .ap-hero-word {
+  animation: ap-headline-rise 1.15s cubic-bezier(.23, 1, .32, 1) forwards;
+}
+#ap-root.ap-ready [data-outline] .ap-hero-word { animation-delay: .14s; }
+[data-outline]::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  color: transparent;
+  -webkit-text-stroke: 1.5px transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-image: linear-gradient(105deg, transparent 28%, rgba(255,75,46,.08) 38%, rgba(255,255,255,.96) 50%, rgba(255,75,46,.24) 61%, transparent 72%);
+  background-size: 220% 100%;
+  background-position: 130% 50%;
+  opacity: 0;
+  z-index: 4;
+}
+#ap-root.ap-ready [data-outline]::after {
+  animation: ap-outline-sheen 1.75s cubic-bezier(.23, 1, .32, 1) .72s both;
+}
 
 /* The blend-mode cursor is meaningless without a mouse. */
 @media (hover: none) {
@@ -97,6 +146,13 @@ a:hover { color: #ff4b2e; }
 
 @media (prefers-reduced-motion: reduce) {
   #ap-panel, #ap-backdrop { transition-duration: .01ms; }
+  .ap-hero-word {
+    animation: none !important;
+    opacity: 1;
+    filter: none;
+    transform: none;
+  }
+  [data-outline]::after { display: none; }
 }
 
 @media (max-width: 520px) {

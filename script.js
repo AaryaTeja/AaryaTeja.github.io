@@ -8,6 +8,7 @@
   function init() {
     const root = document.getElementById('ap-root');
     if (!root) return;
+    root.classList.add('ap-js');
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const coarse = matchMedia('(pointer: coarse)').matches;
     const $ = (s) => document.getElementById(s);
@@ -18,7 +19,13 @@
     // ---- INTRO LOADER ----
     const loader = $('ap-loader'), loadnum = $('ap-loadnum');
     let started = false;
-    const startReveals = () => { if (!started) { started = true; document.body.style.overflow = ''; } };
+    const startReveals = () => {
+      if (!started) {
+        started = true;
+        root.classList.add('ap-ready');
+        document.body.style.overflow = '';
+      }
+    };
     if (loader && loadnum) {
       document.body.style.overflow = 'hidden';
       let p = 0;
