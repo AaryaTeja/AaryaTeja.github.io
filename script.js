@@ -146,19 +146,34 @@
       else { el.style.transform = 'translateY(0)'; }
     };
 
-    const raf = () => {
+    // How hard each frame pulls toward the target, per 60fps frame.
+    // Lower = floatier and longer to settle. SCROLL_EASE is the main dial.
+    const SCROLL_EASE = 0.045;
+    const CURSOR_EASE = 0.3;
+
+    // Frame-rate independent easing. A raw lerp runs twice as fast on a 120Hz
+    // display as on 60Hz; this keeps the feel identical on both.
+    let lastT = 0;
+    const eased = (base, dt) => 1 - Math.pow(1 - base, dt / 16.667);
+
+    const raf = (now) => {
+      const dt = lastT ? Math.min(now - lastT, 100) : 16.667;   // cap after tab-switch stalls
+      lastT = now;
+      const kScroll = eased(SCROLL_EASE, dt);
+      const kCursor = eased(CURSOR_EASE, dt);
+
       // smooth scroll
       if (main && spacer) {
         target = window.scrollY || window.pageYOffset || 0;
-        current = lerp(current, target, 0.085);
+        current = lerp(current, target, kScroll);
         if (Math.abs(target - current) < 0.06) current = target;
-        vel = clamp(target - current, -80, 80);
+        vel = clamp(target - current, -140, 140);
         main.style.transform = `translate3d(0, ${-current}px, 0)`;
       }
       // cursor
       if (cursor) {
-        // 0.3, not the original 0.18 — as the only pointer it has to stay under the hand.
-        cx = lerp(cx, mx, 0.3); cy = lerp(cy, my, 0.3);
+        // Snappier than the scroll — as the only pointer it has to stay under the hand.
+        cx = lerp(cx, mx, kCursor); cy = lerp(cy, my, kCursor);
         cursor.style.transform = `translate(${cx}px, ${cy}px) translate(-50%,-50%)`;
         const s = hovering ? 46 : 14;
         cursor.style.width = s + 'px'; cursor.style.height = s + 'px';
@@ -172,7 +187,7 @@
       }
       // marquee drift + velocity
       if (marquee) {
-        mq -= 0.6 + Math.abs(vel) * 0.06;
+        mq -= (0.6 + Math.abs(vel) * 0.04) * (dt / 16.667);
         const half = marquee.scrollWidth / 2;
         if (half && mq <= -half) mq += half;
         marquee.style.transform = `translateX(${mq}px)`;
