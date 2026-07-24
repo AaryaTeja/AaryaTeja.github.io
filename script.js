@@ -33,7 +33,10 @@
         p += (100 - p) * 0.06 + 0.6;
         if (p >= 99.4) {
           loadnum.textContent = '100';
-          setTimeout(() => { loader.style.transform = 'translateY(-101%)'; startReveals(); }, 320);
+          setTimeout(() => {
+            loader.style.transform = 'translateY(-101%)';
+            setTimeout(startReveals, reduce ? 0 : 560);
+          }, 320);
           return;
         }
         loadnum.textContent = String(Math.floor(p));

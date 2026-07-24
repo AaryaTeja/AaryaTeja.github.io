@@ -11,9 +11,9 @@ a:hover { color: #ff4b2e; }
   to { opacity: 1; filter: blur(0); transform: translate3d(0, 0, 0) rotateX(0); }
 }
 @keyframes ap-outline-sheen {
-  0%, 18% { background-position: 130% 50%; opacity: 0; }
-  32%, 58% { opacity: .62; }
-  100% { background-position: -35% 50%; opacity: 0; }
+  0%, 7% { background-position: 130% 50%; opacity: 0; }
+  14%, 24% { opacity: .62; }
+  34%, 100% { background-position: -35% 50%; opacity: 0; }
 }
 
 .ap-hero-line {
@@ -52,7 +52,7 @@ a:hover { color: #ff4b2e; }
   z-index: 4;
 }
 #ap-root.ap-ready [data-outline]::after {
-  animation: ap-outline-sheen 1.75s cubic-bezier(.23, 1, .32, 1) .72s both;
+  animation: ap-outline-sheen 6.5s cubic-bezier(.23, 1, .32, 1) 0s infinite;
 }
 
 /* The blend-mode cursor is meaningless without a mouse. */
