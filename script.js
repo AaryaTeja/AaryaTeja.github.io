@@ -39,6 +39,7 @@
     // Skipped on touch: the fixed-main + transform trick fights native scrolling.
     const main = $('ap-main');
     let spacer = null, current = 0, target = 0, vel = 0, lastCurrent = 0;
+    let wheelVelocity = 0, wheelActive = false;
     if (main && !reduce && !coarse) {
       spacer = document.createElement('div');
       spacer.setAttribute('aria-hidden', 'true');
@@ -51,6 +52,24 @@
       new ResizeObserver(setH).observe(main);
       window.addEventListener('resize', setH);
       setTimeout(setH, 400); setTimeout(setH, 1200);
+
+      const maxScroll = () => Math.max(0, spacer.offsetHeight - window.innerHeight);
+      const wheelPixels = (e) => {
+        if (e.deltaMode === 1) return e.deltaY * 18;          // lines
+        if (e.deltaMode === 2) return e.deltaY * window.innerHeight; // pages
+        return e.deltaY;                                      // pixels
+      };
+
+      window.addEventListener('wheel', (e) => {
+        if (e.ctrlKey || e.defaultPrevented) return;
+        if (e.target.closest && e.target.closest('#ap-panel')) return;
+
+        e.preventDefault();
+        if (!wheelActive) target = window.scrollY || window.pageYOffset || 0;
+        target = clamp(target, 0, maxScroll());
+        wheelVelocity = clamp(wheelVelocity + wheelPixels(e) * 0.18, -95, 95);
+        wheelActive = true;
+      }, { passive: false });
     }
 
     // ---- ALWAYS OPEN AT THE TOP ----
@@ -67,7 +86,7 @@
       if (location.hash) return;             // don't fight a real deep link
       if (userScrolled && !force) return;    // `load` can fire late; never yank a reader back
       window.scrollTo(0, 0);
-      current = 0; target = 0; vel = 0;
+      current = 0; target = 0; vel = 0; wheelVelocity = 0; wheelActive = false;
       if (main && spacer) main.style.transform = 'translate3d(0, 0, 0)';
     };
     armScrollGuard();
@@ -150,6 +169,7 @@
     // Lower = floatier and longer to settle. SCROLL_EASE is the main dial.
     const SCROLL_EASE = 0.105;
     const CURSOR_EASE = 0.3;
+    const WHEEL_FRICTION = 0.86;
 
     // Frame-rate independent easing. A raw lerp runs twice as fast on a 120Hz
     // display as on 60Hz; this keeps the feel identical on both.
@@ -164,7 +184,18 @@
 
       // smooth scroll
       if (main && spacer) {
-        target = window.scrollY || window.pageYOffset || 0;
+        if (wheelActive) {
+          const max = Math.max(0, spacer.offsetHeight - window.innerHeight);
+          target = clamp(target + wheelVelocity * (dt / 16.667), 0, max);
+          wheelVelocity *= Math.pow(WHEEL_FRICTION, dt / 16.667);
+          if (Math.abs(wheelVelocity) < 0.08 || target <= 0 || target >= max) {
+            wheelVelocity = 0;
+            wheelActive = false;
+          }
+          window.scrollTo(0, target);
+        } else {
+          target = window.scrollY || window.pageYOffset || 0;
+        }
         lastCurrent = current;
         current = lerp(current, target, kScroll);
         if (Math.abs(target - current) < 0.04) current = target;
@@ -314,7 +345,9 @@
     const scrollToAnchor = (el) => {
       const y = Math.max(0, getAnchorTop(el) - 20);
       target = y;
-      window.scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
+      wheelVelocity = 0;
+      wheelActive = false;
+      window.scrollTo({ top: y, behavior: spacer ? 'auto' : (reduce ? 'auto' : 'smooth') });
     };
 
     // smooth anchor scroll
