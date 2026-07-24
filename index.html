@@ -1,23 +1,253 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Aarya — student engineer building robotics, AI, and full-stack web experiences."
-    />
-    <title>Aarya — Robotics, AI & Web</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aaryateja — Software Developer</title>
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<meta name="description" content="Aaryateja — student and software developer building iOS apps in SwiftUI, web apps in React and TypeScript, games in Python and Java, and robots that run on Arduino.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<div id="ap-root" style="--paper:#f2f0ea; --ink:#100f0d; --accent:#ff4b2e; --muted:#8b877d; --line:rgba(16,15,13,.14); font-family:'Space Grotesk',sans-serif; color:var(--ink); background:var(--paper); position:relative;">
+
+  <!-- INTRO LOADER -->
+  <div id="ap-loader" style="position:fixed; inset:0; z-index:200; background:var(--ink); color:var(--paper); display:flex; align-items:flex-end; justify-content:space-between; padding:48px; transition:transform 1s cubic-bezier(.76,0,.24,1);">
+    <div style="font-family:'Archivo',sans-serif; font-weight:900; font-size:clamp(28px,5vw,64px); letter-spacing:-.02em; line-height:.9;">Aaryateja<span style="color:var(--accent);">.</span></div>
+    <div id="ap-loadnum" style="font-family:'Archivo',sans-serif; font-weight:800; font-size:clamp(64px,16vw,220px); line-height:.8; letter-spacing:-.04em;">0</div>
+  </div>
+
+  <!-- CURSOR FOLLOWER -->
+  <div id="ap-cursor" style="position:fixed; top:0; left:0; width:14px; height:14px; border-radius:50%; background:var(--accent); pointer-events:none; z-index:180; mix-blend-mode:difference; transform:translate(-50%,-50%); transition:width .3s ease,height .3s ease; will-change:transform;"></div>
+
+  <!-- HEADER -->
+  <header style="position:fixed; top:0; left:0; width:100%; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:24px 48px; mix-blend-mode:difference;">
+    <a href="#top" style="font-family:'Archivo',sans-serif; font-weight:900; font-size:30px; letter-spacing:-.03em; color:#fff;">Aaryateja<span style="color:var(--accent);">.</span></a>
+    <nav class="ap-nav" style="display:flex; gap:44px; font-size:15px; font-weight:500; color:#fff;">
+      <a href="#about" data-hover style="color:#fff;">About</a>
+      <a href="#work" data-hover style="color:#fff;">Work</a>
+      <a href="#stack" data-hover style="color:#fff;">Stack</a>
+    </nav>
+    <button type="button" data-open-panel data-magnetic data-hover style="font-family:inherit; font-size:15px; font-weight:600; color:#fff; background:none; border:1px solid rgba(255,255,255,.5); padding:11px 22px; border-radius:100px; display:inline-block;">Let's talk</button>
+  </header>
+
+  <!-- SMOOTH-SCROLL CONTENT -->
+  <main id="ap-main" style="position:relative;">
+
+    <!-- HERO -->
+    <section id="top" style="min-height:100vh; padding:0 40px 60px; display:flex; flex-direction:column; justify-content:flex-end;">
+      <div style="height:20vh;"></div>
+      <p data-reveal="up" style="text-align:center; font-size:clamp(16px,2vw,26px); font-weight:500; margin:0 0 min(2vh,20px); opacity:0; transform:translateY(30px); transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);">
+        <span style="display:inline-block; transform-origin:70% 70%; animation:ap-wave 2.6s ease-in-out infinite;">👋</span>&nbsp; hi — I'm Aaryateja, and I'm a
+      </p>
+      <div id="ap-headline" style="position:relative; text-align:center; will-change:transform;">
+        <h1 class="ap-hero-line" style="font-family:'Archivo',sans-serif; font-weight:900; font-size:13.5vw; line-height:.82; letter-spacing:-.04em; margin:0; position:relative; z-index:2;">Software Developer</h1>
+        <h1 class="ap-hero-line" data-outline style="font-family:'Archivo',sans-serif; font-weight:900; font-size:13.5vw; line-height:.82; letter-spacing:-.04em; margin:0; position:relative; z-index:3; color:transparent; -webkit-text-stroke:1.5px var(--ink);">&amp; Roboticist</h1>
+      </div>
+      <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:24px; flex-wrap:wrap; margin-top:min(4vh,44px);">
+        <p data-reveal="up" style="max-width:460px; font-size:clamp(16px,1.4vw,20px); line-height:1.45; margin:0; color:var(--muted); opacity:0; transform:translateY(30px); transition:opacity .9s cubic-bezier(.16,1,.3,1) .1s,transform .9s cubic-bezier(.16,1,.3,1) .1s;">
+          Student &amp; software developer shipping across the whole stack — <span style="color:var(--ink);">iOS apps, web apps, games and robots</span> — usually all in the same week.
+        </p>
+        <div style="display:flex; gap:14px;">
+          <a href="#work" data-magnetic data-hover style="background:var(--ink); color:var(--paper); font-size:15px; font-weight:600; padding:16px 26px; border-radius:100px; white-space:nowrap;">See my work</a>
+          <a href="https://github.com/AaryaTeja" target="_blank" rel="noopener" data-magnetic data-hover style="border:1px solid var(--line); font-size:15px; font-weight:600; padding:16px 26px; border-radius:100px; white-space:nowrap;">GitHub ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- MARQUEE STRIP -->
+    <div style="border-top:1px solid var(--line); border-bottom:1px solid var(--line); overflow:hidden; padding:18px 0; margin-top:40px;">
+      <div id="ap-marquee" style="display:flex; gap:0; white-space:nowrap; will-change:transform;">
+        <span style="font-family:'Archivo',sans-serif; font-weight:800; font-size:22px; letter-spacing:.02em; text-transform:uppercase;">Swift<span style="color:var(--accent); margin:0 26px;">✦</span>SwiftUI<span style="color:var(--accent); margin:0 26px;">✦</span>TypeScript<span style="color:var(--accent); margin:0 26px;">✦</span>React<span style="color:var(--accent); margin:0 26px;">✦</span>Python<span style="color:var(--accent); margin:0 26px;">✦</span>Java<span style="color:var(--accent); margin:0 26px;">✦</span>Arduino<span style="color:var(--accent); margin:0 26px;">✦</span>Game Dev<span style="color:var(--accent); margin:0 26px;">✦</span>Swift<span style="color:var(--accent); margin:0 26px;">✦</span>SwiftUI<span style="color:var(--accent); margin:0 26px;">✦</span>TypeScript<span style="color:var(--accent); margin:0 26px;">✦</span>React<span style="color:var(--accent); margin:0 26px;">✦</span>Python<span style="color:var(--accent); margin:0 26px;">✦</span>Java<span style="color:var(--accent); margin:0 26px;">✦</span>Arduino<span style="color:var(--accent); margin:0 26px;">✦</span>Game Dev<span style="color:var(--accent); margin:0 26px;">✦</span></span>
+      </div>
+    </div>
+
+    <!-- ABOUT -->
+    <section id="about" style="padding:min(16vh,160px) 40px; max-width:1400px; margin:0 auto;">
+      <div style="display:flex; align-items:baseline; gap:16px; margin-bottom:64px;">
+        <span data-reveal="up" style="font-family:'Space Grotesk',monospace; font-size:14px; color:var(--accent); letter-spacing:.1em; opacity:0; transform:translateY(20px); transition:all .8s cubic-bezier(.16,1,.3,1);">(01)</span>
+        <span data-reveal="up" style="font-family:'Space Grotesk',monospace; font-size:14px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); opacity:0; transform:translateY(20px); transition:all .8s cubic-bezier(.16,1,.3,1) .05s;">About me</span>
+      </div>
+      <div class="ap-about-grid" style="display:grid; grid-template-columns:1.4fr .9fr; gap:64px; align-items:start;">
+        <div>
+          <p data-reveal="up" style="font-family:'Archivo',sans-serif; font-weight:700; font-size:clamp(28px,3.6vw,54px); line-height:1.06; letter-spacing:-.03em; margin:0; opacity:0; transform:translateY(40px); transition:all 1s cubic-bezier(.16,1,.3,1);">
+            I build things that have to <span style="color:transparent; -webkit-text-stroke:1.2px var(--ink);">run</span> — on a phone, in a browser, or on a robot chassis in the garage.
+          </p>
+          <div style="display:flex; gap:56px; flex-wrap:wrap; margin-top:56px;">
+            <div data-reveal="up" style="opacity:0; transform:translateY(30px); transition:all .9s cubic-bezier(.16,1,.3,1) .1s;">
+              <div style="font-family:'Archivo',sans-serif; font-weight:900; font-size:56px; line-height:1;">3<span style="color:var(--accent);">+</span></div>
+              <div style="font-size:14px; color:var(--muted); margin-top:6px;">years shipping<br>on GitHub</div>
+            </div>
+            <div data-reveal="up" style="opacity:0; transform:translateY(30px); transition:all .9s cubic-bezier(.16,1,.3,1) .18s;">
+              <div style="font-family:'Archivo',sans-serif; font-weight:900; font-size:56px; line-height:1;">17</div>
+              <div style="font-size:14px; color:var(--muted); margin-top:6px;">projects across<br>iOS, web &amp; robotics</div>
+            </div>
+            <div data-reveal="up" style="opacity:0; transform:translateY(30px); transition:all .9s cubic-bezier(.16,1,.3,1) .26s;">
+              <div style="font-family:'Archivo',sans-serif; font-weight:900; font-size:56px; line-height:1;">6</div>
+              <div style="font-size:14px; color:var(--muted); margin-top:6px;">languages in<br>active rotation</div>
+            </div>
+          </div>
+        </div>
+        <p data-reveal="up" style="font-size:17px; line-height:1.6; color:var(--muted); margin:0; opacity:0; transform:translateY(30px); transition:all .9s cubic-bezier(.16,1,.3,1) .12s;">
+          I'm a computer-science student who learns by building the whole thing. Lately that's meant a SwiftUI app for a student investing club, a React front-end for an autonomous-drone concept, and a peer-to-peer Pong that talks over raw UDP sockets.<br><br>
+          Before the apps there were robots — Arduino wall-followers, obstacle detectors, a chassis car that backs itself out of trouble. That's still the part I like most: making something physical actually respond.
+        </p>
+      </div>
+    </section>
+
+    <!-- WORK -->
+    <section id="work" style="padding:min(8vh,80px) 40px min(16vh,160px);">
+      <div style="max-width:1400px; margin:0 auto;">
+        <div style="display:flex; align-items:baseline; gap:16px; margin-bottom:48px;">
+          <span data-reveal="up" style="font-family:'Space Grotesk',monospace; font-size:14px; color:var(--accent); letter-spacing:.1em; opacity:0; transform:translateY(20px); transition:all .8s cubic-bezier(.16,1,.3,1);">(02)</span>
+          <span data-reveal="up" style="font-family:'Space Grotesk',monospace; font-size:14px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); opacity:0; transform:translateY(20px); transition:all .8s cubic-bezier(.16,1,.3,1) .05s;">Selected work</span>
+        </div>
+        <div style="border-top:1px solid var(--line);">
+
+          <a href="https://github.com/AaryaTeja/youth-invest-connect" target="_blank" rel="noopener" class="ap-project" data-hover style="display:grid; grid-template-columns:56px 1fr auto; align-items:center; gap:24px; padding:36px 8px; border-bottom:1px solid var(--line); transition:padding .5s cubic-bezier(.16,1,.3,1); color:var(--ink);">
+            <span style="font-family:'Space Grotesk',monospace; font-size:14px; color:var(--muted);">01</span>
+            <span class="ap-pmeta">
+              <span class="ap-ptitle" style="font-family:'Archivo',sans-serif; font-weight:800; font-size:clamp(30px,4.4vw,68px); letter-spacing:-.03em; line-height:1; transition:transform .5s cubic-bezier(.16,1,.3,1); display:inline-block;">Youth Invest</span>
+              <span class="ap-pdesc" style="display:block; font-size:14px; line-height:1.45; color:var(--muted); max-width:520px; margin-top:8px;">iOS app for a student investing club — code-based sign-in, four roles, workshops and peer tutoring. Local-first: no accounts, no server.</span>
+            </span>
+            <span style="display:flex; align-items:center; gap:24px;"><span class="ap-ptech" style="font-size:13px; color:var(--muted); letter-spacing:.06em; white-space:nowrap;">SwiftUI · iOS · 2026</span><span class="ap-parrow" style="font-family:'Archivo',sans-serif; font-size:26px; transition:transform .5s cubic-bezier(.16,1,.3,1);">↗</span></span>
+          </a>
+
+          <a href="https://github.com/AaryaTeja/drone-nexus-web" target="_blank" rel="noopener" class="ap-project" data-hover style="display:grid; grid-template-columns:56px 1fr auto; align-items:center; gap:24px; padding:36px 8px; border-bottom:1px solid var(--line); transition:padding .5s cubic-bezier(.16,1,.3,1); color:var(--ink);">
+            <span style="font-family:'Space Grotesk',monospace; font-size:14px; color:var(--muted);">02</span>
+            <span class="ap-pmeta">
+              <span class="ap-ptitle" style="font-family:'Archivo',sans-serif; font-weight:800; font-size:clamp(30px,4.4vw,68px); letter-spacing:-.03em; line-height:1; transition:transform .5s cubic-bezier(.16,1,.3,1); display:inline-block;">AeroX</span>
+              <span class="ap-pdesc" style="display:block; font-size:14px; line-height:1.45; color:var(--muted); max-width:520px; margin-top:8px;">Product site for an autonomous-drone platform — AI autonomy, 8K imaging, long-endurance flight. Component-driven React front-end.</span>
+            </span>
+            <span style="display:flex; align-items:center; gap:24px;"><span class="ap-ptech" style="font-size:13px; color:var(--muted); letter-spacing:.06em; white-space:nowrap;">React · TypeScript · 2026</span><span class="ap-parrow" style="font-family:'Archivo',sans-serif; font-size:26px; transition:transform .5s cubic-bezier(.16,1,.3,1);">↗</span></span>
+          </a>
+
+          <a href="https://github.com/AaryaTeja/Pong_P2P_Game" target="_blank" rel="noopener" class="ap-project" data-hover style="display:grid; grid-template-columns:56px 1fr auto; align-items:center; gap:24px; padding:36px 8px; border-bottom:1px solid var(--line); transition:padding .5s cubic-bezier(.16,1,.3,1); color:var(--ink);">
+            <span style="font-family:'Space Grotesk',monospace; font-size:14px; color:var(--muted);">03</span>
+            <span class="ap-pmeta">
+              <span class="ap-ptitle" style="font-family:'Archivo',sans-serif; font-weight:800; font-size:clamp(30px,4.4vw,68px); letter-spacing:-.03em; line-height:1; transition:transform .5s cubic-bezier(.16,1,.3,1); display:inline-block;">Parallel Pong</span>
+              <span class="ap-pdesc" style="display:block; font-size:14px; line-height:1.45; color:var(--muted); max-width:520px; margin-top:8px;">Two players run their own solo Pong and share live scores over raw UDP — threaded networking, no server in the middle.</span>
+            </span>
+            <span style="display:flex; align-items:center; gap:24px;"><span class="ap-ptech" style="font-size:13px; color:var(--muted); letter-spacing:.06em; white-space:nowrap;">Python · Sockets · 2026</span><span class="ap-parrow" style="font-family:'Archivo',sans-serif; font-size:26px; transition:transform .5s cubic-bezier(.16,1,.3,1);">↗</span></span>
+          </a>
+
+          <a href="https://github.com/AaryaTeja/TheGameOfFame" target="_blank" rel="noopener" class="ap-project" data-hover style="display:grid; grid-template-columns:56px 1fr auto; align-items:center; gap:24px; padding:36px 8px; border-bottom:1px solid var(--line); transition:padding .5s cubic-bezier(.16,1,.3,1); color:var(--ink);">
+            <span style="font-family:'Space Grotesk',monospace; font-size:14px; color:var(--muted);">04</span>
+            <span class="ap-pmeta">
+              <span class="ap-ptitle" style="font-family:'Archivo',sans-serif; font-weight:800; font-size:clamp(30px,4.4vw,68px); letter-spacing:-.03em; line-height:1; transition:transform .5s cubic-bezier(.16,1,.3,1); display:inline-block;">The Game of Fame</span>
+              <span class="ap-pdesc" style="display:block; font-size:14px; line-height:1.45; color:var(--muted); max-width:520px; margin-top:8px;">Two-player 2D platformer built from scratch in Java — hand-made sprite sheets, breakable terrain, coins, ghosts and sound.</span>
+            </span>
+            <span style="display:flex; align-items:center; gap:24px;"><span class="ap-ptech" style="font-size:13px; color:var(--muted); letter-spacing:.06em; white-space:nowrap;">Java · Game Dev · 2025</span><span class="ap-parrow" style="font-family:'Archivo',sans-serif; font-size:26px; transition:transform .5s cubic-bezier(.16,1,.3,1);">↗</span></span>
+          </a>
+
+          <a href="https://github.com/AaryaTeja/robotics" target="_blank" rel="noopener" class="ap-project" data-hover style="display:grid; grid-template-columns:56px 1fr auto; align-items:center; gap:24px; padding:36px 8px; border-bottom:1px solid var(--line); transition:padding .5s cubic-bezier(.16,1,.3,1); color:var(--ink);">
+            <span style="font-family:'Space Grotesk',monospace; font-size:14px; color:var(--muted);">05</span>
+            <span class="ap-pmeta">
+              <span class="ap-ptitle" style="font-family:'Archivo',sans-serif; font-weight:800; font-size:clamp(30px,4.4vw,68px); letter-spacing:-.03em; line-height:1; transition:transform .5s cubic-bezier(.16,1,.3,1); display:inline-block;">Robotics</span>
+              <span class="ap-pdesc" style="display:block; font-size:14px; line-height:1.45; color:var(--muted); max-width:520px; margin-top:8px;">Years of Arduino and Java builds in one place — wall-following robots, obstacle detection, a self-reversing chassis car, LED pattern rigs.</span>
+            </span>
+            <span style="display:flex; align-items:center; gap:24px;"><span class="ap-ptech" style="font-size:13px; color:var(--muted); letter-spacing:.06em; white-space:nowrap;">Arduino · C++ · Java · 2025</span><span class="ap-parrow" style="font-family:'Archivo',sans-serif; font-size:26px; transition:transform .5s cubic-bezier(.16,1,.3,1);">↗</span></span>
+          </a>
+
+        </div>
+        <div data-reveal="up" style="margin-top:40px; opacity:0; transform:translateY(20px); transition:all .8s cubic-bezier(.16,1,.3,1);">
+          <a href="https://github.com/AaryaTeja?tab=repositories" target="_blank" rel="noopener" data-hover style="font-size:15px; color:var(--muted); letter-spacing:.04em;">All repositories on GitHub ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- STACK -->
+    <section id="stack" style="padding:min(12vh,120px) 40px; background:var(--ink); color:var(--paper);">
+      <div style="max-width:1400px; margin:0 auto;">
+        <div style="display:flex; align-items:baseline; gap:16px; margin-bottom:48px;">
+          <span data-reveal="up" style="font-family:'Space Grotesk',monospace; font-size:14px; color:var(--accent); letter-spacing:.1em; opacity:0; transform:translateY(20px); transition:all .8s cubic-bezier(.16,1,.3,1);">(03)</span>
+          <span data-reveal="up" style="font-family:'Space Grotesk',monospace; font-size:14px; letter-spacing:.2em; text-transform:uppercase; color:rgba(242,240,234,.6); opacity:0; transform:translateY(20px); transition:all .8s cubic-bezier(.16,1,.3,1) .05s;">What I build with</span>
+        </div>
+        <div class="ap-stack-grid" style="display:grid; grid-template-columns:repeat(3,1fr); gap:18px;">
+          <div data-reveal="up" data-tilt style="grid-column:span 2; background:rgba(242,240,234,.06); border:1px solid rgba(242,240,234,.14); border-radius:20px; padding:36px; opacity:0; transform:translateY(40px); transition:all .9s cubic-bezier(.16,1,.3,1);">
+            <div style="font-family:'Archivo',sans-serif; font-weight:900; font-size:clamp(30px,3.4vw,48px); letter-spacing:-.02em; line-height:1;">iOS &amp; SwiftUI</div>
+            <p style="font-size:15px; line-height:1.5; color:rgba(242,240,234,.6); margin:16px 0 0; max-width:460px;">Native apps with role-based access and local-first storage — designed to work with no backend and no accounts to leak.</p>
+          </div>
+          <div data-reveal="up" data-tilt style="background:var(--accent); color:var(--ink); border-radius:20px; padding:36px; display:flex; align-items:flex-end; opacity:0; transform:translateY(40px); transition:all .9s cubic-bezier(.16,1,.3,1) .08s;">
+            <div style="font-family:'Archivo',sans-serif; font-weight:900; font-size:clamp(26px,2.8vw,40px); letter-spacing:-.02em; line-height:.95;">React &amp;<br>TypeScript</div>
+          </div>
+          <div data-reveal="up" data-tilt style="background:rgba(242,240,234,.06); border:1px solid rgba(242,240,234,.14); border-radius:20px; padding:36px; display:flex; align-items:flex-end; min-height:180px; opacity:0; transform:translateY(40px); transition:all .9s cubic-bezier(.16,1,.3,1) .1s;">
+            <div style="font-family:'Archivo',sans-serif; font-weight:900; font-size:clamp(26px,2.8vw,40px); letter-spacing:-.02em; line-height:.95;">Python &amp;<br>Networking</div>
+          </div>
+          <div data-reveal="up" data-tilt style="background:rgba(242,240,234,.06); border:1px solid rgba(242,240,234,.14); border-radius:20px; padding:36px; display:flex; align-items:flex-end; opacity:0; transform:translateY(40px); transition:all .9s cubic-bezier(.16,1,.3,1) .16s;">
+            <div style="font-family:'Archivo',sans-serif; font-weight:900; font-size:clamp(26px,2.8vw,40px); letter-spacing:-.02em; line-height:.95;">Java &amp;<br>Game Dev</div>
+          </div>
+          <div data-reveal="up" data-tilt style="background:rgba(242,240,234,.06); border:1px solid rgba(242,240,234,.14); border-radius:20px; padding:36px; display:flex; align-items:flex-end; opacity:0; transform:translateY(40px); transition:all .9s cubic-bezier(.16,1,.3,1) .22s;">
+            <div style="font-family:'Archivo',sans-serif; font-weight:900; font-size:clamp(26px,2.8vw,40px); letter-spacing:-.02em; line-height:.95;">Arduino &amp;<br>Embedded</div>
+          </div>
+        </div>
+        <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:32px;">
+          <span data-reveal="up" style="border:1px solid rgba(242,240,234,.24); border-radius:100px; padding:9px 18px; font-size:13px; color:rgba(242,240,234,.8); opacity:0; transform:translateY(20px); transition:all .7s cubic-bezier(.16,1,.3,1);">Swift</span>
+          <span data-reveal="up" style="border:1px solid rgba(242,240,234,.24); border-radius:100px; padding:9px 18px; font-size:13px; color:rgba(242,240,234,.8); opacity:0; transform:translateY(20px); transition:all .7s cubic-bezier(.16,1,.3,1) .03s;">SwiftUI</span>
+          <span data-reveal="up" style="border:1px solid rgba(242,240,234,.24); border-radius:100px; padding:9px 18px; font-size:13px; color:rgba(242,240,234,.8); opacity:0; transform:translateY(20px); transition:all .7s cubic-bezier(.16,1,.3,1) .06s;">TypeScript</span>
+          <span data-reveal="up" style="border:1px solid rgba(242,240,234,.24); border-radius:100px; padding:9px 18px; font-size:13px; color:rgba(242,240,234,.8); opacity:0; transform:translateY(20px); transition:all .7s cubic-bezier(.16,1,.3,1) .09s;">React</span>
+          <span data-reveal="up" style="border:1px solid rgba(242,240,234,.24); border-radius:100px; padding:9px 18px; font-size:13px; color:rgba(242,240,234,.8); opacity:0; transform:translateY(20px); transition:all .7s cubic-bezier(.16,1,.3,1) .12s;">Python</span>
+          <span data-reveal="up" style="border:1px solid rgba(242,240,234,.24); border-radius:100px; padding:9px 18px; font-size:13px; color:rgba(242,240,234,.8); opacity:0; transform:translateY(20px); transition:all .7s cubic-bezier(.16,1,.3,1) .15s;">Java</span>
+          <span data-reveal="up" style="border:1px solid rgba(242,240,234,.24); border-radius:100px; padding:9px 18px; font-size:13px; color:rgba(242,240,234,.8); opacity:0; transform:translateY(20px); transition:all .7s cubic-bezier(.16,1,.3,1) .18s;">C++</span>
+          <span data-reveal="up" style="border:1px solid rgba(242,240,234,.24); border-radius:100px; padding:9px 18px; font-size:13px; color:rgba(242,240,234,.8); opacity:0; transform:translateY(20px); transition:all .7s cubic-bezier(.16,1,.3,1) .21s;">C#</span>
+          <span data-reveal="up" style="border:1px solid rgba(242,240,234,.24); border-radius:100px; padding:9px 18px; font-size:13px; color:rgba(242,240,234,.8); opacity:0; transform:translateY(20px); transition:all .7s cubic-bezier(.16,1,.3,1) .24s;">Tailwind</span>
+          <span data-reveal="up" style="border:1px solid rgba(242,240,234,.24); border-radius:100px; padding:9px 18px; font-size:13px; color:rgba(242,240,234,.8); opacity:0; transform:translateY(20px); transition:all .7s cubic-bezier(.16,1,.3,1) .27s;">Vite</span>
+          <span data-reveal="up" style="border:1px solid rgba(242,240,234,.24); border-radius:100px; padding:9px 18px; font-size:13px; color:rgba(242,240,234,.8); opacity:0; transform:translateY(20px); transition:all .7s cubic-bezier(.16,1,.3,1) .3s;">pygame</span>
+          <span data-reveal="up" style="border:1px solid rgba(242,240,234,.24); border-radius:100px; padding:9px 18px; font-size:13px; color:rgba(242,240,234,.8); opacity:0; transform:translateY(20px); transition:all .7s cubic-bezier(.16,1,.3,1) .33s;">Git</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT / FOOTER -->
+    <section id="contact" style="padding:min(16vh,170px) 40px 40px; text-align:center;">
+      <p data-reveal="up" style="font-family:'Space Grotesk',monospace; font-size:14px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); margin:0 0 28px; opacity:0; transform:translateY(20px); transition:all .8s cubic-bezier(.16,1,.3,1);">(04) — Got something to build?</p>
+      <a href="mailto:hello@aaryateja.dev" id="ap-bigmail" data-hover style="display:inline-block; font-family:'Archivo',sans-serif; font-weight:900; font-size:clamp(40px,9vw,150px); letter-spacing:-.04em; line-height:.9; color:var(--ink);">hello@aaryateja.dev</a>
+      <div style="margin-top:44px;">
+        <button type="button" data-open-panel data-magnetic data-hover style="font-family:inherit; display:inline-block; border:none; background:var(--ink); color:var(--paper); font-size:16px; font-weight:600; padding:18px 34px; border-radius:100px;">Start a conversation ↗</button>
+      </div>
+      <footer style="max-width:1400px; margin:min(14vh,140px) auto 0; padding-top:28px; border-top:1px solid var(--line); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
+        <div style="font-family:'Archivo',sans-serif; font-weight:900; font-size:22px; letter-spacing:-.02em;">Aaryateja<span style="color:var(--accent);">.</span></div>
+        <div style="display:flex; gap:26px; font-size:14px;">
+          <a href="https://github.com/AaryaTeja" target="_blank" rel="noopener" data-hover>GitHub</a>
+          <a href="#" data-hover>LinkedIn</a>
+          <a href="mailto:hello@aaryateja.dev" data-hover>Email</a>
+        </div>
+        <div style="font-size:13px; color:var(--muted);">© 2026 — Built, broken, rebuilt</div>
+      </footer>
+    </section>
+
+  </main>
+
+  <!-- CONTACT PANEL -->
+  <div id="ap-backdrop" tabindex="-1"></div>
+  <aside id="ap-panel" role="dialog" aria-modal="true" aria-labelledby="ap-panel-title">
+    <button type="button" id="ap-panel-close" aria-label="Close">&times;</button>
+    <p class="ap-panel-eyebrow">(05) — Direct line</p>
+    <h2 id="ap-panel-title">Let's talk<span>.</span></h2>
+    <p class="ap-panel-lede">Tell me what you're building. I read everything and reply to most things within a day or two.</p>
+
+    <form id="ap-form" novalidate>
+      <label for="ap-f-name">Name</label>
+      <input id="ap-f-name" name="name" type="text" autocomplete="name" required>
+
+      <label for="ap-f-email">Email</label>
+      <input id="ap-f-email" name="email" type="email" autocomplete="email" required>
+
+      <label for="ap-f-msg">Message</label>
+      <textarea id="ap-f-msg" name="message" rows="5" required></textarea>
+
+      <!-- Honeypot: real people never fill this in. `_honey` is also what FormSubmit checks. -->
+      <input type="text" name="_honey" id="ap-f-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+      <button type="submit" id="ap-f-submit">Send message</button>
+      <p id="ap-f-status" role="status" aria-live="polite"></p>
+    </form>
+  </aside>
+
+</div>
+<script src="./script.js"></script>
+</body>
 </html>

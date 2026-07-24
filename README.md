@@ -1,39 +1,47 @@
-# Aarya — Portfolio
+# aaryateja.github.io
 
-A single-page, dark, cinematic portfolio built with **React + Vite + TypeScript + Tailwind CSS**,
-featuring "liquid glass" morphism UI and smooth blur/fade animations via **Framer Motion**.
+Personal site — [aaryateja.github.io](https://aaryateja.github.io/)
 
-Two full-screen sections: **Hero** and **Capabilities**.
+Plain HTML, CSS and JavaScript. No framework, no build step, no dependencies.
 
-## Run it
+| File | What's in it |
+| --- | --- |
+| `index.html` | All markup and content |
+| `styles.css` | Global styles, contact panel, breakpoints |
+| `script.js` | Intro loader, momentum scroll, cursor dot, reveals, marquee, contact panel |
+
+## Run it locally
 
 ```bash
-npm install
-npm run dev      # http://localhost:5173
-npm run build    # typecheck + production build to /dist
-npm run preview  # preview the production build
+python3 -m http.server 4173
 ```
 
-## Where to edit content
+Then open <http://localhost:4173>. It **must** be served over HTTP — opening `index.html`
+as a `file://` URL leaves the scripts blocked, so the intro loader sits at 0 and nothing
+initialises.
 
-| What | File |
-| --- | --- |
-| Headline, subtext, badge, stats, nav links, trust-bar tech, contact links | `src/sections/Hero.tsx` |
-| Section heading + the three capability cards (titles, tags, body) | `src/sections/Capabilities.tsx` |
-| Background video URLs | `HERO_VIDEO` in `Hero.tsx`, `CAP_VIDEO` in `Capabilities.tsx` |
-| Fonts | `index.html` (`<link>`) + `tailwind.config.js` (`fontFamily`) |
-| Liquid-glass styles | `src/index.css` (`.liquid-glass`, `.liquid-glass-strong`) |
+## Contact form
 
-Contact links currently point to `mailto:hello@aaryateja.dev` and GitHub `AaryaTeja` — update in `Hero.tsx`.
+The panel posts to [FormSubmit](https://formsubmit.co), which relays to the address in
+`FORM_ENDPOINT` in the contact-panel block of `script.js`.
 
-## Components
+FormSubmit **rejects requests from localhost** — it checks the origin and returns
+"Make sure you open this page through a web server". Submitting locally will always show
+the error state; that is expected, not a bug. Test on the deployed site.
 
-- `FadingVideo` — `<video>` that fades in on load, fades out before the clip ends, and loops
-  (single `src`) or cycles (array `src`).
-- `BlurText` — word-by-word staggered blur-in, triggered on scroll via IntersectionObserver.
-- `icons.tsx` — hand-rolled SVG icons (no icon library).
+To keep the destination address out of page source, swap the endpoint for the random
+alias FormSubmit issues after activation:
 
-## Note
+```js
+const FORM_ENDPOINT = 'https://formsubmit.co/ajax/<your-alias>';
+```
 
-The previous Next.js version of this portfolio was archived to `backup/` when this Vite
-version replaced it. Nothing was deleted.
+## Deploying
+
+Every push to `main` runs `.github/workflows/deploy.yml`, which publishes the repo root to
+GitHub Pages as-is. There is nothing to compile.
+
+## History
+
+This replaced a React + Vite + TypeScript version of the portfolio. That code is not on
+any branch — recover it from git history (`git log -- src/`) if you need it.
